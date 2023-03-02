@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TestApp1.Models
+namespace TestApp1.DTOs
 {
     public class BaseModelDTO
     {
-        [Key]
         public int ID { get; set; }
         public Guid GUID { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
