@@ -6,11 +6,11 @@ namespace TestApp1.DTOs
     public class SpellCreateDTO : BaseModelDTO
     {
         [Required]
-        public spell_type SpellType { get; set; }
+        public string SpellType { get; set; }
         [Required]
-        public components Components { get; set; }
+        public string Components { get; set; }
         [Required]
-        public classes Classes { get; set; }
+        public string Classes { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
