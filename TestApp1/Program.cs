@@ -13,6 +13,7 @@ sqlConBuilder.ConnectionString = builder.Configuration.GetConnectionString("SQLD
 
 builder.Services.AddDbContext<ApplicationDBContext>(opt => opt.UseSqlServer(sqlConBuilder.ConnectionString));
 builder.Services.AddScoped<ISpellRepo, SpellRepo>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
