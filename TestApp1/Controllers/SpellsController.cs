@@ -35,7 +35,7 @@ namespace TestApp1.Controllers
         }
 
         [HttpGet("{id}", Name = "GetSpellById")]
-        public async Task<ActionResult<SpellReadDTO>> GetCommandById(int id)
+        public async Task<ActionResult<SpellReadDTO>> GetSpellById(int id)
         {
             var spellModel = await _repo.GetSpellById(id);
             if (spellModel != null)
@@ -56,12 +56,12 @@ namespace TestApp1.Controllers
 
             Console.WriteLine($"Model State is: {ModelState.IsValid}");
 
-            return CreatedAtRoute(nameof(GetCommandById), new { Id = spellReadDto.ID }, spellReadDto);
+            return CreatedAtRoute(nameof(GetSpellById), spellReadDto);
         }
 
-        //PATCH api/v1/commands/{id}
+        //PATCH api/v1/spells/{id}
         [HttpPatch("{id}")]
-        public async Task<ActionResult> PartialCommandUpdate(int id, JsonPatchDocument<SpellUpdateDto> patchDoc)
+        public async Task<ActionResult> PartialCommandUpdate(int id, JsonPatchDocument<SpellUpdateDTO> patchDoc)
         {
             var spellModelFromRepo = await _repo.GetSpellById(id);
             if (spellModelFromRepo == null)
@@ -69,7 +69,7 @@ namespace TestApp1.Controllers
                 return NotFound();
             }
 
-            var spellToPatch = _mapper.Map<SpellUpdateDto>(spellModelFromRepo);
+            var spellToPatch = _mapper.Map<SpellUpdateDTO>(spellModelFromRepo);
             patchDoc.ApplyTo(spellToPatch, (Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter)ModelState);
 
             if (!TryValidateModel(spellToPatch))
@@ -85,7 +85,7 @@ namespace TestApp1.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateCommand(int id, SpellUpdateDto spellUpdateDto)
+        public async Task<ActionResult> UpdateCommand(int id, SpellUpdateDTO spellUpdateDto)
         {
             var spellModelFromRepo = await _repo.GetSpellById(id);
             if (spellModelFromRepo == null)
