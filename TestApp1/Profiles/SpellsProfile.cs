@@ -11,7 +11,7 @@ namespace TestApp1.Profiles
             // Source -> Target
             CreateMap<Spell, SpellReadDTO>();
             CreateMap<SpellCreateDTO, Spell>();
-            CreateMap <SpellUpdateDto, Spell>();
+            CreateMap <SpellUpdateDTO, Spell>();
         }
     }
 }

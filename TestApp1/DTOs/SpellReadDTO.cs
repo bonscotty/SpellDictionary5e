@@ -1,9 +1,10 @@
 ﻿namespace TestApp1.DTOs
 {
-    public class SpellReadDTO : BaseModelDTO
+    public class SpellReadDTO
     {
         public string Name { get; set; }
         public string SpellType { get; set; }
+        public string Description { get; set; }
         public string Components { get; set; }
         public string Classes { get; set; }
         public int Level { get; set; }

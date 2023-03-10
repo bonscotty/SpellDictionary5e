@@ -6,7 +6,8 @@ namespace TestApp1.Models
     {
         [Required]
         public string Name { get; set; }
-        //TODO: add spell description
+        [Required]
+        public string Description { get; set; }
         [Required]
         public string SpellType { get; set; }
         [Required] 

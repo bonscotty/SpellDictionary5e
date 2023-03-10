@@ -2,7 +2,7 @@
 
 namespace TestApp1.DTOs
 {
-    public class SpellUpdateDto : BaseModelDTO
+    public class SpellUpdateDTO
     {
         [Required]
         public spell_type SpellType { get; set; }
