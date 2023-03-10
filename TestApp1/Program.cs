@@ -1,6 +1,8 @@
+using AutoMapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using TestApp1.Data;
+using TestApp1.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,5 +26,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapGet("api/v1/spells", async (ISpellRepo repo, IMapper mapper) =>
+{
+    var spells = await repo.GetAllSpells();
+    return Results.Ok(mapper.Map<IEnumerable<SpellReadDTO>>(spells));
+});
 
 app.Run();

@@ -7,7 +7,7 @@ namespace TestApp1.Data
     public interface ISpellRepo
     {
         Task SaveChanges();
-        Task<Spell?> GetCommandById(int id);
+        Task<Spell?> GetSpellById(int id);
         Task<IEnumerable<Spell>> GetAllSpells();
         Task CreateSpell(Spell spell);
         void DeleteSpell(Spell spell); 

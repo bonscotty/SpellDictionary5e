@@ -1,11 +1,11 @@
 ﻿namespace TestApp1.DTOs
 {
-    public class SpellReadDTO
+    public class SpellReadDTO : BaseModelDTO
     {
-        public spell_type SpellType { get; set; }
-        public components Components { get; set; }
-        public classes Classes { get; set; }
         public string Name { get; set; }
+        public string SpellType { get; set; }
+        public string Components { get; set; }
+        public string Classes { get; set; }
         public int Level { get; set; }
         public int Range { get; set; }
         public string Target { get; set; }

@@ -29,7 +29,7 @@ namespace TestApp1.Data
             return await _ctx.Spells!.Where(c => c.IsDeleted != true).ToListAsync();
         }
 
-        public async Task<Spell?> GetCommandById(int id)
+        public async Task<Spell?> GetSpellById(int id)
         {
             return await _ctx.Spells.FirstOrDefaultAsync(c => c.ID == id && c.IsDeleted != true);
         }

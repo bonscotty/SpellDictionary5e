@@ -5,13 +5,14 @@ namespace TestApp1.Models
     public class Spell : BaseModelDTO
     {
         [Required]
-        public string SpellType { get; set; }
+        public string Name { get; set; }
+        //TODO: add spell description
         [Required]
-        public string Components { get; set; }
+        public string SpellType { get; set; }
         [Required] 
         public string Classes { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string Components { get; set; }
         [Required] 
         public int Level { get; set; }
         [Required] 
