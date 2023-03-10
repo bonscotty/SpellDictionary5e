@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using TestApp1.Data;
@@ -28,14 +29,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//TODO work on validation for each endpoint
 app.MapGet("api/v1/spells", async (ISpellRepo repo, IMapper mapper) =>
 {
     var spells = await repo.GetAllSpells();
     return Results.Ok(mapper.Map<IEnumerable<SpellReadDTO>>(spells));
 });
 
-//TODO:look up model binding
 app.MapGet("api/v1/spells/{id}", async (ISpellRepo repo, IMapper mapper, int id) =>
 {
     var spell = await repo.GetSpellById(id);
@@ -46,7 +45,7 @@ app.MapGet("api/v1/spells/{id}", async (ISpellRepo repo, IMapper mapper, int id)
     return Results.NotFound();
 });
 
-app.MapPost("api/v1/spells", async (ISpellRepo repo, IMapper mapper, SpellCreateDTO spellCreateDTO) =>
+app.MapPost("api/v1/spells", async (ISpellRepo repo, IMapper mapper, [FromBody]SpellCreateDTO spellCreateDTO) =>
 {
     if (spellCreateDTO != null)
     {
@@ -62,6 +61,32 @@ app.MapPost("api/v1/spells", async (ISpellRepo repo, IMapper mapper, SpellCreate
         return Results.Created($"api/v1/spells",spellReadDTO);
     }
     return Results.Text("Spell DTO is NULL");
+});
+
+app.MapPut("api/v1/spells/{id}", async (ISpellRepo repo, IMapper mapper, [FromRoute]int id, [FromBody]SpellUpdateDTO spellUpdateDTO) =>
+{
+    if (spellUpdateDTO != null) 
+    {
+        var spellToUpdate = await repo.GetSpellById(id);
+        if (spellToUpdate == null) 
+        {
+            return Results.NotFound();
+        }
+
+        mapper.Map(spellUpdateDTO, spellToUpdate);
+        await repo.SaveChanges();
+
+        return Results.Ok(mapper.Map<SpellReadDTO>(spellToUpdate));
+    }
+    return Results.Text("Spell Update DTO empty");
+});
+
+app.MapDelete("api/v1/spells/{id}", async (ISpellRepo repo, IMapper mapper, [FromRoute] int id) =>
+{
+    repo.DeleteSpell(id);
+    await repo.SaveChanges();
+
+    return Results.NoContent();
 });
 
 app.Run();

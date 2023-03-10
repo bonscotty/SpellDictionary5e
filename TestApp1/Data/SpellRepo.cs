@@ -18,10 +18,15 @@ namespace TestApp1.Data
             await _ctx.AddAsync(spell);
         }
 
-        public void DeleteSpell(Spell spell)
+        public void DeleteSpell(int id)
         {
-            if (spell == null) throw new ArgumentNullException(nameof(spell));
-            _ctx.Spells.Remove(spell);
+            if (id == 0) throw new ArgumentNullException(nameof(id));
+            var spell = _ctx.Spells.FirstOrDefaultAsync(c => c.ID == id && c.IsDeleted != true);
+            
+            if (spell.Result != null) 
+            {
+                spell.Result.IsDeleted = true;
+            }
         }
 
         public async Task<IEnumerable<Spell>> GetAllSpells()
@@ -38,5 +43,6 @@ namespace TestApp1.Data
         {
             await _ctx.SaveChangesAsync();
         }
+
     }
 }

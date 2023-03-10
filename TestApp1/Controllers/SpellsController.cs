@@ -107,7 +107,7 @@ namespace TestApp1.Controllers
             {
                 return NotFound();
             }
-            _repo.DeleteSpell(spellModelFromRepo);
+            _repo.DeleteSpell(id);
             await _repo.SaveChanges();
 
             return NoContent();

@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using TestApp1.Models;
-using TestApp1.DTOs;
 
 namespace TestApp1.Data
 {
@@ -10,6 +9,6 @@ namespace TestApp1.Data
         Task<Spell?> GetSpellById(int id);
         Task<IEnumerable<Spell>> GetAllSpells();
         Task CreateSpell(Spell spell);
-        void DeleteSpell(Spell spell); 
+        void DeleteSpell(int id); 
     }
 }
