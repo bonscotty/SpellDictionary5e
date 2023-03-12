@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.JsonPatch;
 
 namespace TestApp1.Controllers
 {
-    [ServiceFilter(typeof(TestAsyncActionFilter))]
     [Route("api/v1/[controller]")]
     [ApiController]
     public class SpellsController : ControllerBase

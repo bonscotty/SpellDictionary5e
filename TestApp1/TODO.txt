@@ -2,5 +2,6 @@
 remove GUID method - it is pointless because we don't need unique identifiers
 have only 1 DTO - the other DTOs are redundant and don't serve any purpose
 work on validation for each endpoint - implement defensive programming
+reimplement TestAsyncFilter - removed it for testing, now I need to put it back lol
 
 look up model binding - lol wtf even is that
